@@ -1,0 +1,37 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from FranceFacadeService WSDL service -->
+
+  <service name="FranceFacade" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://facade.villes"/>
+      <parameter name="wsdlServiceElement" value="FranceFacadeService"/>
+      <parameter name="schemaQualified" value="http://entities.villes,http://facade.villes"/>
+      <parameter name="wsdlServicePort" value="FranceFacade"/>
+      <parameter name="className" value="villes.facade.FranceFacadeSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="FranceFacade"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getVillesByCodePostal" qname="operNS:getVillesByCodePostal" xmlns:operNS="http://facade.villes" returnQName="retNS:getVillesByCodePostalReturn" xmlns:retNS="http://facade.villes" returnType="rtns:Ville" xmlns:rtns="http://entities.villes" soapAction="" >
+        <parameter qname="pns:cp" xmlns:pns="http://facade.villes" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getVillesByCodePostal"/>
+
+      <typeMapping
+        xmlns:ns="http://entities.villes"
+        qname="ns:Ville"
+        type="java:villes.entities.Ville"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

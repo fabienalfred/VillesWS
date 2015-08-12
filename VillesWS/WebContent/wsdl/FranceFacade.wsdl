@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://facade.villes" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://facade.villes" xmlns:intf="http://facade.villes" xmlns:tns1="http://entities.villes" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://facade.villes" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://entities.villes"/>
+   <element name="getVillesByCodePostal">
+    <complexType>
+     <sequence>
+      <element name="cp" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getVillesByCodePostalResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getVillesByCodePostalReturn" type="tns1:Ville"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://entities.villes" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Ville">
+    <sequence>
+     <element name="codePostal" nillable="true" type="xsd:string"/>
+     <element name="departement" nillable="true" type="xsd:string"/>
+     <element name="id" type="xsd:long"/>
+     <element name="latitude" type="xsd:double"/>
+     <element name="longitude" type="xsd:double"/>
+     <element name="nom" nillable="true" type="xsd:string"/>
+     <element name="region" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getVillesByCodePostalResponse">
+
+      <wsdl:part element="impl:getVillesByCodePostalResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getVillesByCodePostalRequest">
+
+      <wsdl:part element="impl:getVillesByCodePostal" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="FranceFacade">
+
+      <wsdl:operation name="getVillesByCodePostal">
+
+         <wsdl:input message="impl:getVillesByCodePostalRequest" name="getVillesByCodePostalRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getVillesByCodePostalResponse" name="getVillesByCodePostalResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="FranceFacadeSoapBinding" type="impl:FranceFacade">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getVillesByCodePostal">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getVillesByCodePostalRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getVillesByCodePostalResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="FranceFacadeService">
+
+      <wsdl:port binding="impl:FranceFacadeSoapBinding" name="FranceFacade">
+
+         <wsdlsoap:address location="http://localhost:8080/VillesWS/services/FranceFacade"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

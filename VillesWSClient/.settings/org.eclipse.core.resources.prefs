@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+encoding//src/villes/entities/Ville.java=UTF-8
+encoding//src/villes/facade/FranceFacade.java=UTF-8
+encoding//src/villes/facade/FranceFacadeService.java=UTF-8
+encoding//src/villes/facade/FranceFacadeServiceLocator.java=UTF-8
+encoding//src/villes/facade/FranceFacadeSoapBindingStub.java=UTF-8

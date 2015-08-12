@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from FranceFacadeService WSDL service -->
+
+  <service name="FranceFacade" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://facade.villes"/>
+      <parameter name="wsdlServiceElement" value="FranceFacadeService"/>
+      <parameter name="schemaQualified" value="http://entities.villes,http://facade.villes"/>
+      <parameter name="wsdlServicePort" value="FranceFacade"/>
+      <parameter name="className" value="villes.facade.FranceFacade"/>
+      <parameter name="wsdlPortType" value="FranceFacade"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://facade.villes" xmlns:retNS="http://facade.villes" xmlns:rtns="http://entities.villes" name="getVillesByCodePostal" qname="operNS:getVillesByCodePostal" returnQName="retNS:getVillesByCodePostalReturn" returnType="rtns:Ville" soapAction="">
+        <parameter xmlns:pns="http://facade.villes" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:cp" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="getVillesByCodePostal"/>
+
+      <typeMapping xmlns:ns="http://entities.villes" qname="ns:Ville" type="java:villes.entities.Ville" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
